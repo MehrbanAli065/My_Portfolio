@@ -1,0 +1,26 @@
+# What Vercel does NOT need. These all stay in Git — that is the source of
+# truth and the reason the site can be rebuilt — but none of them belong on a
+# public URL.
+#
+# Before this file existed, https://<site>/portfolio.html served a second,
+# complete copy of the page (a duplicate Google can index against you), and
+# /build.mjs, /deploy.mjs and the rest were all readable by anyone.
+
+# The source the site is built FROM. index.html is what gets served.
+portfolio.html
+
+# Build and verification tooling. Nothing runs at deploy time — the site is
+# already built when it is committed.
+build.mjs
+deploy.mjs
+check-contrast.mjs
+contrast-audit.js
+
+# The link-preview card generator. og.png itself lives at the root and IS
+# deployed; only the thing that makes it is excluded.
+og/
+
+# Repository documentation and Git plumbing.
+README.md
+.gitattributes
+.gitignore
