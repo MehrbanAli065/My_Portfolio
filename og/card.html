@@ -1,0 +1,76 @@
+<!doctype html>
+<meta charset="utf-8">
+<!--
+  The link preview card. 1200x630 is what LinkedIn, WhatsApp, Slack and X all
+  crop to, so it is built at exactly that size and rendered at 2x.
+
+  Regenerate:  node og/render.mjs      (writes og.png at the repo root)
+-->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;700;800&family=IBM+Plex+Mono:wght@500&display=swap">
+<style>
+  :root {
+    --paper:#FFFFFF; --ink:#0B0F16; --accent:#1D4ED8; --accent-2:#0E7490;
+    --spine:#0B8A5F; --muted:#454D5C; --rule:#E4E6EA;
+  }
+  * { box-sizing: border-box; margin: 0 }
+  html, body { width: 1200px; height: 630px }
+  body {
+    font-family: "Plus Jakarta Sans", system-ui, sans-serif;
+    color: var(--ink); background: var(--paper);
+    display: grid; grid-template-columns: 1fr 360px;
+    position: relative; overflow: hidden;
+  }
+  /* the same green spine that runs down the portfolio's project list */
+  body::before {
+    content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 10px;
+    background: linear-gradient(180deg, var(--spine), var(--accent-2));
+  }
+  .left { padding: 66px 40px 60px 74px; display: flex; flex-direction: column; justify-content: center }
+  .eyebrow {
+    font-family: "IBM Plex Mono", monospace; font-size: 19px; font-weight: 500;
+    letter-spacing: .16em; text-transform: uppercase; color: var(--accent);
+    margin-bottom: 26px;
+  }
+  h1 { font-size: 78px; font-weight: 800; letter-spacing: -.035em; line-height: .98 }
+  h1 em { font-style: normal; color: var(--accent) }
+  .role {
+    font-size: 30px; font-weight: 700; letter-spacing: -.018em;
+    line-height: 1.24; margin-top: 20px; max-width: 17ch;
+  }
+  .figs { display: flex; gap: 40px; margin-top: 40px; padding-top: 30px; border-top: 2px solid var(--rule) }
+  .fig b {
+    display: block; font-size: 38px; font-weight: 800; letter-spacing: -.03em;
+    color: var(--accent); font-variant-numeric: tabular-nums;
+  }
+  .fig span { display: block; font-size: 17px; line-height: 1.32; color: var(--muted); margin-top: 5px; max-width: 15ch }
+  .right { position: relative; display: grid; place-items: center; background: #F5F6F8 }
+  .right::before {
+    content: ""; position: absolute; inset: 0;
+    background: radial-gradient(120% 90% at 70% 24%, color-mix(in srgb, var(--accent) 16%, transparent), transparent 66%);
+  }
+  .right img {
+    position: relative; width: 268px; height: 268px; border-radius: 50%;
+    object-fit: cover; object-position: center top;
+    border: 4px solid var(--accent);
+    box-shadow: 0 26px 60px -28px rgba(29,78,216,.6);
+  }
+  .url {
+    position: absolute; right: 0; bottom: 46px; width: 360px; text-align: center;
+    font-family: "IBM Plex Mono", monospace; font-size: 19px; font-weight: 500;
+    color: var(--muted);
+  }
+</style>
+<div class="left">
+  <p class="eyebrow">Portfolio</p>
+  <h1>Mehrban <em>Ali</em></h1>
+  <p class="role">AI Automation Engineer — RPA, UiPath Certified, Agentic &amp; Voice AI</p>
+  <div class="figs">
+    <div class="fig"><b>25+</b><span>client automation projects</span></div>
+    <div class="fig"><b>240+</b><span>Shopify stores tracked daily</span></div>
+    <div class="fig"><b>8</b><span>UiPath certifications</span></div>
+  </div>
+</div>
+<div class="right"><img src="../photo.jpg" alt=""></div>
+<div class="url">mehrban-ali.vercel.app</div>
