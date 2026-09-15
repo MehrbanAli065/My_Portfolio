@@ -1,0 +1,10 @@
+# Keep the HTML and the scripts as LF in the repo; Git checks them out with
+# native line endings on Windows. Binaries are never touched.
+*.html  text eol=lf
+*.mjs   text eol=lf
+*.js    text eol=lf
+*.md    text eol=lf
+*.json  text eol=lf
+*.jpg   binary
+*.png   binary
+*.pdf   binary
