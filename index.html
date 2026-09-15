@@ -68,6 +68,9 @@
   --diag-text:   var(--ink);
   --diag-edge:   var(--accent);
   --diag-label:  var(--faint);
+  /* The fade at a scrollable edge. Derived from the ink, not from the
+     accent, so it reads as depth rather than as another blue. */
+  --diag-shadow: color-mix(in srgb, var(--ink) 9%, transparent);
   --diag-accent: var(--signal);
 
   /* ONE family for headings and prose, separated by weight rather than by
@@ -414,11 +417,34 @@ h2.sec {
   background: var(--diag-fill);
   border: var(--border-w) solid var(--hairline);
   border-radius: var(--radius-sm);
+}
+
+/* Only the drawing scrolls. The figure itself used to be the scroll box, which
+   meant the caption and the walkthrough bar slid off sideways with it — on a
+   phone you could scroll the diagram and lose the words explaining it. */
+.dscroll {
   overflow-x: auto;
+  scrollbar-width: thin;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior-x: contain;
+
+  /* Two pairs of gradients: opaque covers pinned to the content (local), and
+     shadows pinned to the box (scroll). When there is nothing more to scroll
+     the cover sits over the shadow and hides it, so the fade appears only on
+     the side that actually continues. Nothing to compute in script. */
+  background-image:
+    linear-gradient(to right, var(--diag-fill), var(--diag-fill)),
+    linear-gradient(to left,  var(--diag-fill), var(--diag-fill)),
+    linear-gradient(to right, var(--diag-shadow), transparent),
+    linear-gradient(to left,  var(--diag-shadow), transparent);
+  background-position: left center, right center, left center, right center;
+  background-repeat: no-repeat;
+  background-size: 30px 100%, 30px 100%, 34px 100%, 34px 100%;
+  background-attachment: local, local, scroll, scroll;
 }
 /* Direct child only. As a descendant selector this also caught the play
    icon inside the walkthrough button and forced it to 620px wide. */
-.diagram > svg { display: block; width: 100%; min-width: 620px; height: auto }
+.dscroll > svg { display: block; width: 100%; min-width: 620px; height: auto }
 .diagram figcaption {
   font-size: var(--fs-mono-sm); line-height: var(--lh-snug);
   color: var(--faint); margin-top: 14px; padding-top: 12px;
@@ -542,6 +568,9 @@ h2.sec {
 
 @media (max-width: 780px) {
   .pao { grid-template-columns: 1fr; gap: 20px }
+  /* Stacked, the Problem rule lands 20px under the head's own border and the
+     two read as a mistake. The head keeps its space, the rule goes. */
+  .project-head { border-bottom: 0; padding-bottom: 4px; margin-bottom: 14px }
 }
 
 .figures {
@@ -1165,11 +1194,14 @@ h2.sec::after {
 .role-block { padding-block: 26px }
 
 @media (max-width: 680px) {
-  /* at this width the cards lose their side padding too — a rail plus a
-     48px gutter would leave almost nothing for the text */
-  .projects, .roles { padding-left: 0 }
-  .projects::before, .roles::before { display: none }
-  .project::after, .role-block::after { display: none }
+  /* The spine stays — it is how the page reads as one piece — but a 48px
+     gutter would take a seventh of a phone screen away from the text. At
+     18px it still threads the list together and costs almost nothing. */
+  .projects, .roles { padding-left: 18px }
+  .projects::before, .roles::before { left: 4px; width: 2px }
+  .project::after, .role-block::after {
+    left: -18px; width: 11px; height: 11px; border-width: 2px;
+  }
 }
 
 /* ── diagram walkthrough ─────────────────────────────────────────────
@@ -1215,8 +1247,46 @@ h2.sec::after {
   .navlinks a { padding: 6px 8px }
 }
 @media (max-width: 680px) {
+  /* The type scale was drawn for a 1120px column. Carried unchanged onto a
+     390px screen the headings eat three lines each and the page turns into an
+     endless scroll. Only the display sizes come down — body copy stays at 17px
+     because that is what makes it readable held in one hand. */
+  :root {
+    --fs-2: 1.6rem;
+    --fs-3: 1.3125rem;
+    --fs-4: 1.0625rem;
+    --fs-stat: 1.125rem;
+    --fs-lede: 1.0625rem;
+  }
+
   .masthead-grid { grid-template-columns: 1fr }
   .photo { order: -1; max-width: 160px }
+
+  /* A centred icon over left-aligned copy looks accidental in a narrow
+     column. Everything lines up on the same left edge instead. */
+  .cap { text-align: left; padding: 26px 22px 24px }
+  .capicon { margin-left: 0; margin-right: auto }
+
+  /* Roomy padding is what makes a card feel considered on a laptop and
+     cramped on a phone, because it is taking width the text needs. */
+  .diagram { padding: 16px 14px 12px }
+  /* Out to the edge of the card: a fade that stops short of the border looks
+     like a grey panel sitting on the diagram. */
+  .dscroll { margin-inline: -14px; padding-inline: 14px }
+  .how li { padding: 20px 20px 22px }
+  .cred { padding: 22px 20px 20px }
+  .tb-group { padding: 18px 20px 20px }
+
+  /* Below this width the drawing is always wider than the screen — its own
+     minimum is 620px — so the hint is never shown when it would be untrue.
+     The edge fade says there is more; this says what to do about it. */
+  .diagram figcaption::before {
+    content: "Swipe the diagram →";
+    display: block; margin-bottom: 9px;
+    font-family: var(--body); font-weight: 600; font-size: var(--fs-label);
+    letter-spacing: var(--ls-label); text-transform: uppercase;
+    color: var(--accent);
+  }
   .role-block { grid-template-columns: 1fr; gap: 14px }
   .rail .dates, .rail .loc { display: inline }
   .project { padding: 24px 20px 26px }
@@ -1329,7 +1399,8 @@ h2.sec::after {
     <p class="lede">Two years across healthcare, legal, education, retail and finance. Nearly everything below is the same shape, and it is the shape worth drawing:</p>
 
     <figure class="diagram">
-      <svg viewBox="0 0 920 102" role="img" aria-label="The shared pattern: an agent or robot collects, a queue makes each item a transaction, a database keeps append-only history, and an application makes it readable.">
+      <div class="dscroll">
+          <svg viewBox="0 0 920 102" role="img" aria-label="The shared pattern: an agent or robot collects, a queue makes each item a transaction, a database keeps append-only history, and an application makes it readable.">
         <defs>
           <marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
             <path d="M0 0 L10 5 L0 10 z" fill="var(--diag-edge)"/>
@@ -1367,6 +1438,7 @@ h2.sec::after {
         </circle>
 
       </svg>
+        </div>
       <figcaption>The queue is the part people skip. Without it a run that fails on record 40 loses the other 39.</figcaption>
     </figure>
 
@@ -1458,7 +1530,8 @@ h2.sec::after {
       </div>
 
       <figure class="diagram" data-wt="[{&quot;n&quot;: [0], &quot;t&quot;: &quot;A booking request lands in the intake sheet.&quot;}, {&quot;n&quot;: [1], &quot;t&quot;: &quot;The first robot turns each row into an Orchestrator queue item.&quot;}, {&quot;n&quot;: [2], &quot;t&quot;: &quot;Now it is one transaction. It will succeed, fail with a reason, or be retried.&quot;}, {&quot;n&quot;: [3], &quot;t&quot;: &quot;The booking robot takes one item at a time and works inside the practice-management system.&quot;}, {&quot;n&quot;: [4], &quot;t&quot;: &quot;The appointment is written to the system of record.&quot;}, {&quot;n&quot;: [2, 3], &quot;t&quot;: &quot;If it fails, only that item goes back to the queue. A run that breaks on record 40 keeps the other 39.&quot;}]">
-        <svg viewBox="0 0 920 178" role="img" aria-label="Work enters an Orchestrator queue as individual items; the booking robot takes one at a time and writes the outcome back, so a failed appointment is retried on its own rather than restarting the batch.">
+        <div class="dscroll">
+          <svg viewBox="0 0 920 178" role="img" aria-label="Work enters an Orchestrator queue as individual items; the booking robot takes one at a time and writes the outcome back, so a failed appointment is retried on its own rather than restarting the batch.">
           <defs>
             <marker id="a1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
               <path d="M0 0 L10 5 L0 10 z" fill="var(--diag-edge)"/>
@@ -1507,6 +1580,7 @@ h2.sec::after {
           <path class="dedge dedge--alt" d="M648 74 V 126 H 460 V 80" marker-end="url(#a1r)"/>
           <text class="dtag dtag--key" x="554" y="144">failed item goes back as a retry, not a re-run</text>
         </svg>
+        </div>
         <figcaption>Each appointment is one queue transaction: it succeeds, or it fails with a reason and is retried on its own.</figcaption>
         <div class="wt">
           <button class="wt-play" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l11-6.5z" fill="currentColor"/></svg><span class="wt-label">Walk through it</span></button>
@@ -1554,7 +1628,8 @@ h2.sec::after {
       </div>
 
       <figure class="diagram" data-wt="[{&quot;n&quot;: [0, 1, 2, 3], &quot;t&quot;: &quot;A patient makes contact on any of four channels: inbound call, outbound call, SMS or email.&quot;}, {&quot;n&quot;: [4], &quot;t&quot;: &quot;One Retell agent handles all four, from a single prompt.&quot;}, {&quot;n&quot;: [5], &quot;t&quot;: &quot;It answers from one shared knowledge base, so a policy change is edited once rather than in four prompts.&quot;}, {&quot;n&quot;: [6], &quot;t&quot;: &quot;When the call ends it is analysed automatically and PII is redacted.&quot;}, {&quot;n&quot;: [7, 8], &quot;t&quot;: &quot;A webhook writes a structured outcome to the intake sheet.&quot;}, {&quot;n&quot;: [8], &quot;t&quot;: &quot;From here the booking robots take over. The agent never touches the system of record.&quot;}]">
-        <svg viewBox="0 0 920 226" role="img" aria-label="Four contact channels converge on a single Retell agent backed by one shared knowledge base; the call is analysed, posted to a webhook, and written to the intake sheet the booking robots read.">
+        <div class="dscroll">
+          <svg viewBox="0 0 920 226" role="img" aria-label="Four contact channels converge on a single Retell agent backed by one shared knowledge base; the call is analysed, posted to a webhook, and written to the intake sheet the booking robots read.">
           <defs>
             <marker id="a2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
               <path d="M0 0 L10 5 L0 10 z" fill="var(--diag-edge)"/>
@@ -1610,6 +1685,7 @@ h2.sec::after {
 
           <text class="dtag" x="460" y="220">Conversation ends here. Everything after it is a record, not a chat.</text>
         </svg>
+        </div>
         <figcaption>One knowledge base behind all four channels, so a policy change is edited once rather than in four prompts.</figcaption>
         <div class="wt">
           <button class="wt-play" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l11-6.5z" fill="currentColor"/></svg><span class="wt-label">Walk through it</span></button>
@@ -1657,7 +1733,8 @@ h2.sec::after {
       </div>
 
       <figure class="diagram" data-wt="[{&quot;n&quot;: [0], &quot;t&quot;: &quot;A Google Sheet holds the list of stores to watch.&quot;}, {&quot;n&quot;: [1], &quot;t&quot;: &quot;Three UiPath robots pull one product export per store, every day.&quot;}, {&quot;n&quot;: [2], &quot;t&quot;: &quot;240+ CSVs land in Google Drive.&quot;}, {&quot;n&quot;: [3, 4], &quot;t&quot;: &quot;Two callers can ingest them: the nightly n8n workflow, or a manual backfill script.&quot;}, {&quot;n&quot;: [5], &quot;t&quot;: &quot;Both call the same PostgreSQL function, so the two paths cannot write different history for one store.&quot;}, {&quot;n&quot;: [6, 7], &quot;t&quot;: &quot;Current state is refreshed; history is append-only. On a measured day, 7,558 variants produced 136 rows.&quot;}]">
-        <svg viewBox="0 0 920 300" role="img" aria-label="Robots upload a CSV per store to Drive. Both the nightly n8n workflow and the manual script call the same PostgreSQL function to diff and write, so the two paths cannot produce different history. Current state is refreshed; history is append-only and takes 1.8 percent of a full snapshot.">
+        <div class="dscroll">
+          <svg viewBox="0 0 920 300" role="img" aria-label="Robots upload a CSV per store to Drive. Both the nightly n8n workflow and the manual script call the same PostgreSQL function to diff and write, so the two paths cannot produce different history. Current state is refreshed; history is append-only and takes 1.8 percent of a full snapshot.">
           <defs>
             <marker id="a3" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
               <path d="M0 0 L10 5 L0 10 z" fill="var(--diag-edge)"/>
@@ -1717,6 +1794,7 @@ h2.sec::after {
           <rect class="dnode" x="500" y="272" width="230" height="24" rx="3"/>
           <text class="dsub" x="615" y="285">variant_history &mdash; append-only</text>
         </svg>
+        </div>
         <figcaption>Both callers run the same function, so the scheduled path and the scripted path cannot write different history for the same store.</figcaption>
         <div class="wt">
           <button class="wt-play" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l11-6.5z" fill="currentColor"/></svg><span class="wt-label">Walk through it</span></button>
@@ -1765,7 +1843,8 @@ h2.sec::after {
       </div>
 
       <figure class="diagram" data-wt="[{&quot;n&quot;: [0], &quot;t&quot;: &quot;Calls, documents and message threads go in exactly as the client sent them.&quot;}, {&quot;n&quot;: [1], &quot;t&quot;: &quot;The first AI stage writes a brief, and a project manager reviews it before anything else runs.&quot;}, {&quot;n&quot;: [2, 3], &quot;t&quot;: &quot;Epics and journeys are drafted from the approved brief, each reviewed in turn.&quot;}, {&quot;n&quot;: [4], &quot;t&quot;: &quot;Only then are delivery-ready tasks generated.&quot;}, {&quot;n&quot;: [5, 6], &quot;t&quot;: &quot;The push to ClickUp goes through a mapping table, so re-running updates the tasks instead of filing the plan twice.&quot;}]">
-        <svg viewBox="0 0 920 190" role="img" aria-label="Four AI stages run in sequence from raw input to tasks, each gated by a project-manager review, and the final push to ClickUp goes through a mapping table so re-running updates existing tasks instead of duplicating them.">
+        <div class="dscroll">
+          <svg viewBox="0 0 920 190" role="img" aria-label="Four AI stages run in sequence from raw input to tasks, each gated by a project-manager review, and the final push to ClickUp goes through a mapping table so re-running updates existing tasks instead of duplicating them.">
           <defs>
             <marker id="a4" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
               <path d="M0 0 L10 5 L0 10 z" fill="var(--diag-edge)"/>
@@ -1820,6 +1899,7 @@ h2.sec::after {
           <text class="dsub" x="710" y="163">via clickup_mappings &mdash; re-run updates</text>
           <line class="dedge" x1="820" y1="162" x2="850" y2="162"/>
         </svg>
+        </div>
         <figcaption>The mapping table is what makes a second run safe: it updates the tasks it created rather than filing the plan twice.</figcaption>
         <div class="wt">
           <button class="wt-play" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l11-6.5z" fill="currentColor"/></svg><span class="wt-label">Walk through it</span></button>
@@ -1867,7 +1947,8 @@ h2.sec::after {
       </div>
 
       <figure class="diagram" data-wt="[{&quot;n&quot;: [0], &quot;t&quot;: &quot;Phase one reads the county jail portal.&quot;}, {&quot;n&quot;: [1], &quot;t&quot;: &quot;It extracts the current inmate roster.&quot;}, {&quot;n&quot;: [2], &quot;t&quot;: &quot;Phase two searches the Clerk of Court for each record, one row at a time.&quot;}, {&quot;n&quot;: [3], &quot;t&quot;: &quot;The search page presents an image check. Google OCR reads it inside a retry scope, so an unreadable image costs one retry rather than the run.&quot;}, {&quot;n&quot;: [4], &quot;t&quot;: &quot;The matching case summary is saved together with its source PDF.&quot;}, {&quot;n&quot;: [5], &quot;t&quot;: &quot;Everything lands in Excel, with every row traceable back to the document it came from.&quot;}]">
-        <svg viewBox="0 0 920 224" role="img" aria-label="Phase one reads the jail portal into a roster. Phase two searches the Clerk of Court for each record, reading the image verification step with Google OCR inside a retry scope, and writes the case summary and its source PDF into Excel.">
+        <div class="dscroll">
+          <svg viewBox="0 0 920 224" role="img" aria-label="Phase one reads the jail portal into a roster. Phase two searches the Clerk of Court for each record, reading the image verification step with Google OCR inside a retry scope, and writes the case summary and its source PDF into Excel.">
           <defs>
             <marker id="a5" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
               <path d="M0 0 L10 5 L0 10 z" fill="var(--diag-edge)"/>
@@ -1928,6 +2009,7 @@ h2.sec::after {
           <path class="dedge dedge--alt" d="M300 132 V 116 H 382 V 130" marker-end="url(#a5r)"/>
           <text class="dtag dtag--key" x="341" y="210">unreadable image costs one retry, not the run</text>
         </svg>
+        </div>
         <figcaption>Splitting the phases means a failure while matching never sends the robot back through the jail portal.</figcaption>
         <div class="wt">
           <button class="wt-play" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l11-6.5z" fill="currentColor"/></svg><span class="wt-label">Walk through it</span></button>
