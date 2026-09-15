@@ -104,7 +104,7 @@ Each one is drawn to make a single point, which its caption states:
 | Clinic robots | the retry arrow back into the queue — one failed appointment, not a failed batch |
 | AI agent suite | four channels converging on one agent and **one** knowledge base |
 | Shopify tracker | two callers, one PostgreSQL function, so the paths cannot drift |
-| WBS Builder | a PM review gate between every AI stage, and the mapping table that makes re-runs safe |
+| AI Scoping Pipeline | a PM review gate between every AI stage, and the mapping table that makes re-runs safe |
 | Legal intake | the phase split, and the retry scope around the one step that fails intermittently |
 
 To edit one, the shapes use shared classes — `.dnode`, `.dnode--key` (the emphasised
@@ -352,7 +352,7 @@ Ordered by how much they carry. Client names are withheld throughout — see
 | Clinic Booking & Scheduling Robots | `Projects/Project_6_ShiftGrit/` | a multi-site mental-health clinic group, Canada |
 | Multi-Channel AI Agent Suite | `Projects/Project_4_Retell_AI_Agent/` | the same clinic group |
 | Competitor Price & Stock Tracker | `Projects/Shopify_Stores/` | e-commerce competitor intelligence |
-| WBS Builder | `Projects/Project_2_wbs-builder/` | an internal delivery platform |
+| AI Scoping Pipeline | `Projects/Project_2_*/` | an internal delivery platform |
 | Legal Case Intake Automation | `Projects/St luice__Automation_Project (2).zip` | a US county |
 
 ## Every figure on the page, and what it was counted from
@@ -371,7 +371,7 @@ counted in the project itself and can be recounted.
 | 1.8%, 7,558 → 136 rows | measured on a real ingest day, recorded in `tracker/README.md` |
 | 5.5M vs ~180M rows a year | calculated from that rate |
 | 10 tables | `CREATE TABLE` count in `tracker/db/*.sql` |
-| 23,769 lines, 137 files | `git ls-files` + `wc -l` in `Project_2_wbs-builder` |
+| 23,769 lines, 137 files | `git ls-files` + `wc -l` in `Project_2_*` |
 | 15 tables | `CREATE TABLE` count in `apps/api/src/db/*.sql` |
 | 8 certifications, 100% score | `../CV/Ceritificates/` |
 
