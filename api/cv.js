@@ -26,6 +26,12 @@ export default function handler(req, res) {
   const country = String(req.headers['x-vercel-ip-country'] || '').toUpperCase()
   const target = UAE_CV_COUNTRIES.includes(country) ? UAE_CV : PAKISTAN_CV
 
+  // Which country was seen, on the response. Invisible to a visitor, and it is
+  // the only way to tell "the UAE branch was not taken" apart from "the header
+  // never arrived" — both of which send the Pakistan CV and look identical from
+  // outside. Check it with:  curl -sI https://<site>/api/cv | grep -i x-cv
+  res.setHeader('X-CV-Country', country || 'unknown')
+
   // Never cache the decision. A CDN that caches one visitor's redirect would
   // hand the next country the wrong CV, and the mistake would be invisible.
   res.setHeader('Cache-Control', 'no-store, must-revalidate')
