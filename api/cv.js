@@ -16,8 +16,11 @@
 //   ['AE', 'SA', 'QA', 'KW', 'OM', 'BH']
 const UAE_CV_COUNTRIES = ['AE']
 
-const UAE_CV = '/cv/Mehrban-Ali-CV-UAE.pdf'
-const PAKISTAN_CV = '/cv/Mehrban-Ali-CV-Pakistan.pdf'
+// Same filename, different folder, on purpose: whichever one a visitor is sent,
+// the file that lands in their downloads folder is called the same thing. The
+// market is the directory, which only this code ever reads.
+const UAE_CV = '/cv/uae/Mehrban-Ali-AI-Automation-Engineer-CV.pdf'
+const PAKISTAN_CV = '/cv/pakistan/Mehrban-Ali-AI-Automation-Engineer-CV.pdf'
 
 export default function handler(req, res) {
   const country = String(req.headers['x-vercel-ip-country'] || '').toUpperCase()

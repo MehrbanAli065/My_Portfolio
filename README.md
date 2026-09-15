@@ -224,6 +224,23 @@ anything fails, nothing is pushed.
 
 Edit `portfolio.html`, never `index.html`.
 
+### Why both files are called the same thing
+
+`Mehrban-Ali-AI-Automation-Engineer-CV.pdf` — in `cv/uae/` and in `cv/pakistan/`, and
+in `CV/Cvs/UAE/` and `CV/Cvs/Pakistan/`.
+
+The name is built for a recruiter's downloads folder: **his name first**, so it sorts
+and is findable among twenty attachments; **the role** he is applying for, which is what
+someone scanning an attachment list is looking for; then **CV**, so the file says what
+it is before anyone opens it. "CV" rather than "Resume" — that is the word used in both
+the UAE and Pakistan.
+
+The market is the **folder**, never the filename. A recruiter only ever receives one of
+the two, so a `-UAE` or `-Pakistan` suffix tells them nothing they need, and invites the
+one question you do not want in an inbox: *why does he have a different CV for me?*
+Two directories with one filename means the geo route can send either version and the
+file that arrives is named identically.
+
 ### Which CV a visitor gets
 
 `api/cv.js` is a Vercel function. It reads `x-vercel-ip-country` from the request and
@@ -256,8 +273,7 @@ They serve the same `index.html`. Only the CV button differs, and only because
 
 ## The CV
 
-`cv/` holds the two PDFs the page serves — `Mehrban-Ali-CV-UAE.pdf` and
-`Mehrban-Ali-CV-Pakistan.pdf`, copied from `CV/Cvs/`. They are published **as
+`cv/` holds the two PDFs the page serves — `cv/uae/` and `cv/pakistan/`, copied from `CV/Cvs/`. They are published **as
 supporting files of the artifact**, so they sit next to `index.html` at its own
 origin and cost nothing until someone asks for one.
 
@@ -279,8 +295,9 @@ is left alone rather than retried.
 
 **After rebuilding a CV**, copy it over and republish *with the files map*:
 
-```
-cp CV/Cvs/UAE/Mehrban-Ali-RPA-Developer-UAE.pdf  Portfolio/cv/Mehrban-Ali-CV-UAE.pdf
+```bash
+cp CV/Cvs/UAE/Mehrban-Ali-AI-Automation-Engineer-CV.pdf       Portfolio/cv/uae/
+cp CV/Cvs/Pakistan/Mehrban-Ali-AI-Automation-Engineer-CV.pdf  Portfolio/cv/pakistan/
 ```
 
 then ask Claude to publish passing `files` with both `cv/...pdf` paths. A publish that
