@@ -53,7 +53,7 @@ const html = `<!doctype html>
      thing a scraper checks before it trusts an image. -->
 <meta property="og:image:width" content="2400">
 <meta property="og:image:height" content="1260">
-<meta property="og:image:alt" content="Mehrban Ali - AI Automation Engineer. 45+ automation projects delivered, 240+ Shopify stores tracked daily, 5 certifications across UiPath and Make.">
+<meta property="og:image:alt" content="Mehrban Ali - AI Automation Engineer. 45+ automation projects delivered, 240+ Shopify stores tracked daily, 3 certifications across UiPath and Make.">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='5' fill='%230F3D56'/%3E%3Ctext x='16' y='22' font-family='Helvetica,Arial,sans-serif' font-size='16' font-weight='700' fill='%23F6F8F9' text-anchor='middle'%3EM%3C/text%3E%3C/svg%3E">
 <style>
