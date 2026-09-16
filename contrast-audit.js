@@ -71,6 +71,13 @@
   }
 
   var rows = []
+  // A closed <dialog> is display:none, so nothing inside it would be walked and
+  // its colours would ship unmeasured. Open every one non-modally first: show()
+  // makes the content visible without a backdrop or an inert page behind it.
+  document.querySelectorAll('dialog').forEach(function (d) {
+    try { if (!d.open) d.show() } catch (e) {}
+  })
+
   var all = document.querySelectorAll('*')
   for (var i = 0; i < all.length; i++) {
     var el = all[i]

@@ -1307,6 +1307,82 @@ h2.sec::after {
   .project:hover, .project:focus-within { transform: none }
   .spark { display: none }
 }
+/* ── the hire panel ──────────────────────────────────────────────────
+   A native <dialog>, so Esc, the focus trap and the backdrop come from the
+   browser rather than from script I would have to get right. */
+.hire {
+  width: min(560px, calc(100vw - 32px));
+  max-height: min(86vh, 760px);
+  overflow-y: auto;
+  padding: 34px 34px 30px;
+  border: var(--border-w) solid var(--rule);
+  border-radius: var(--radius-card);
+  background: var(--surface); color: var(--ink);
+  box-shadow: var(--lift-lg);
+}
+.hire::backdrop { background: rgba(11, 15, 22, .55) }
+.hire[open] { animation: hirein .22s cubic-bezier(.22,.7,.3,1) both }
+@keyframes hirein { from { opacity: 0; transform: translateY(10px) scale(.99) } to { opacity: 1; transform: none } }
+
+/* The section eyebrow draws a rule to the end of its line; in here that runs
+   straight into the close button. */
+.hire .eyebrow::after { display: none }
+.hire-x { position: sticky; top: -34px; float: right; margin: -10px -8px 0 0; z-index: 2 }
+.hire-x button {
+  width: 34px; height: 34px; border-radius: 50%; cursor: pointer;
+  border: var(--border-w) solid var(--rule); background: var(--surface);
+  color: var(--muted); font-size: 20px; line-height: 1;
+}
+.hire-x button:hover { background: var(--sunken); color: var(--deep) }
+
+.hire h2 {
+  font-family: var(--display); font-weight: 800; font-size: var(--fs-3);
+  letter-spacing: var(--ls-3); color: var(--deep); margin: 0 0 8px;
+}
+.hire-lede { margin: 0 0 22px; color: var(--muted); font-size: var(--fs-sm); line-height: var(--lh-body); max-width: none }
+.hire-acts { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 22px }
+.hire-acts .btn { font-size: var(--fs-sm) }
+
+.hire-routes { list-style: none; margin: 0 0 24px; padding: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 1px;
+  background: var(--rule); border: var(--border-w) solid var(--rule); border-radius: var(--radius-sm); overflow: hidden }
+.hire-routes a {
+  display: flex; align-items: center; gap: 10px; padding: 13px 15px;
+  background: var(--surface); color: var(--ink); text-decoration: none;
+  font-size: var(--fs-sm); font-weight: 600; transition: background-color .2s ease;
+}
+.hire-routes a:hover { background: var(--sunken); color: var(--deep) }
+.hire-routes .ico { width: 18px; height: 18px; flex: none }
+
+.hire-facts { margin: 0 0 24px; display: grid; gap: 1px; background: var(--rule);
+  border: var(--border-w) solid var(--rule); border-radius: var(--radius-sm); overflow: hidden }
+.hire-facts > div { display: flex; justify-content: space-between; gap: 16px; padding: 11px 15px; background: var(--surface) }
+.hire-facts dt { font-size: var(--fs-label); font-weight: 700; letter-spacing: var(--ls-label);
+  text-transform: uppercase; color: var(--faint) }
+.hire-facts dd { margin: 0; font-size: var(--fs-sm); font-weight: 600; color: var(--deep); text-align: right }
+
+.hire-proof-head {
+  margin: 0 0 11px; font-size: var(--fs-label); font-weight: 700;
+  letter-spacing: var(--ls-label); text-transform: uppercase; color: var(--faint);
+}
+.hire-proof { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 9px }
+.hire-proof a {
+  display: block; padding: 12px 14px; text-decoration: none;
+  border: var(--border-w) solid var(--hairline); border-radius: var(--radius-sm);
+  background: var(--surface); transition: border-color .2s ease, background-color .2s ease;
+}
+.hire-proof a:hover { border-color: var(--accent); background: color-mix(in srgb, var(--accent) 5%, var(--surface)) }
+.hire-proof b {
+  display: block; font-family: var(--display); font-weight: 800; font-size: var(--fs-4);
+  letter-spacing: var(--ls-4); color: var(--accent); font-variant-numeric: tabular-nums;
+}
+.hire-proof span { display: block; font-size: var(--fs-mono-sm); line-height: var(--lh-snug); color: var(--muted); margin-top: 3px }
+
+@media (max-width: 680px) {
+  .hire { padding: 26px 20px 24px }
+  .hire-routes, .hire-proof { grid-template-columns: 1fr }
+  .hire-facts > div { flex-direction: column; gap: 3px }
+  .hire-facts dd { text-align: left }
+}
 </style>
 
 <nav class="navbar">
@@ -1350,7 +1426,7 @@ h2.sec::after {
         <p class="blurb rise rise-2">I build automations that hold up in production &mdash; AI voice agents that take the call, UiPath robots that do the work inside the system of record, and the pipelines that join the two.</p>
         <div class="cta rise rise-3">
           <a class="btn" href="#work"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6"/></svg>View my work</a>
-          <a class="btn btn--ghost" href="mailto:mehrbanali25062000@gmail.com"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="4.75" width="19" height="14.5" rx="2.2"/><path d="m3.2 6.4 8.8 6.4 8.8-6.4"/></svg>Hire me</a>
+          <a class="btn btn--ghost" href="mailto:mehrbanali25062000@gmail.com" data-hire><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="4.75" width="19" height="14.5" rx="2.2"/><path d="m3.2 6.4 8.8 6.4 8.8-6.4"/></svg>Hire me</a>
           <!-- The PDF is published alongside this page, so the href is a real
                file. Two routes on purpose: the link on its own opens the CV in
                a new tab, and where the viewer's client allows it the script at
@@ -2230,6 +2306,46 @@ h2.sec::after {
   </div>
 </footer>
 
+<!-- Opened by the Hire me button. The button keeps its own mailto href, so with
+     no script at all it still does what it says; this only upgrades the click.
+     It is deliberately NOT a pitch: someone who clicked "Hire me" has already
+     decided. What they need is a route that works and the four facts they are
+     about to ask for anyway. -->
+<dialog class="hire" id="hire" aria-labelledby="hire-title">
+  <form method="dialog" class="hire-x"><button aria-label="Close">&times;</button></form>
+
+  <p class="eyebrow">Get in touch</p>
+  <h2 id="hire-title">Let&rsquo;s talk</h2>
+  <p class="hire-lede">Tell me the role and I&rsquo;ll reply with whether it fits and what I&rsquo;d want to know. Usually within a day.</p>
+
+  <div class="hire-acts">
+    <a class="btn" href="mailto:mehrbanali25062000@gmail.com?subject=Role%20enquiry%20%E2%80%94%20Mehrban%20Ali&body=Hi%20Mehrban%2C%0A%0ARole%3A%20%0ACompany%3A%20%0ALocation%3A%20%0A%0A"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="4.75" width="19" height="14.5" rx="2.2"/><path d="m3.2 6.4 8.8 6.4 8.8-6.4"/></svg>Email me</a>
+    <button class="btn btn--ghost" type="button" data-copy="mehrbanali25062000@gmail.com"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="8.6" y="8.6" width="12" height="12" rx="2.4"/><path d="M15.4 5.4H5.8a2.4 2.4 0 0 0-2.4 2.4v9.6"/></svg><span class="copy-label">Copy address</span></button>
+  </div>
+
+  <ul class="hire-routes">
+    <li><a href="https://www.linkedin.com/in/mehrban-ali/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" class="ico" aria-hidden="true"><rect width="24" height="24" rx="4.2" fill="#0A66C2"/><path fill="#ffffff" d="M7.25 9.55H4.7V19.2h2.55V9.55ZM5.97 5.05a1.48 1.48 0 1 0 0 2.96 1.48 1.48 0 0 0 0-2.96ZM19.3 19.2h-2.55v-4.7c0-1.12-.02-2.56-1.56-2.56-1.56 0-1.8 1.22-1.8 2.48v4.78h-2.55V9.55h2.45v1.32h.03c.34-.65 1.18-1.33 2.42-1.33 2.59 0 3.07 1.7 3.07 3.92v5.74Z"/></svg>LinkedIn</a></li>
+    <li><a href="https://wa.me/923412481025" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" class="ico" aria-hidden="true"><circle cx="12" cy="12" r="11" fill="#25D366"/><path fill="#fff" d="M12 5.6a6.3 6.3 0 0 0-5.4 9.6l-.8 3 3.1-.8A6.3 6.3 0 1 0 12 5.6Zm3.5 8.7c-.15.42-.87.8-1.2.83-.31.03-.7.04-1.13-.07a10.3 10.3 0 0 1-4.1-3.6c-.3-.42-.67-1.1-.67-1.8s.36-1 .5-1.14a.5.5 0 0 1 .37-.17h.27c.09 0 .2-.03.32.24l.44 1.07c.04.08.06.17.01.27l-.16.27-.24.26c-.08.08-.16.16-.07.31.09.16.4.66.86 1.07.6.53 1.1.7 1.25.78.16.08.25.07.34-.04l.48-.56c.11-.15.21-.12.35-.07l1 .47c.15.07.25.11.28.17.04.06.04.35-.1.77Z"/></svg>WhatsApp</a></li>
+    <li><a href="tel:+923412481025"><svg viewBox="0 0 24 24" class="ico" aria-hidden="true"><circle cx="12" cy="12" r="11" fill="#12A150"/><path fill="#ffffff" d="M9.1 5.9H7.4a1.6 1.6 0 0 0-1.6 1.7c0 6.7 5.5 12.2 12.2 12.2a1.6 1.6 0 0 0 1.7-1.6v-1.6a.8.8 0 0 0-.68-.8l-3.1-.52a.8.8 0 0 0-.8.39l-.8 1.35a10.9 10.9 0 0 1-4.8-4.8l1.36-.8a.8.8 0 0 0 .38-.8l-.52-3.1a.8.8 0 0 0-.8-.68Z"/></svg>+92 341 2481025</a></li>
+    <li><a href="cv/uae/Mehrban-Ali-AI-Automation-Engineer-CV.pdf" data-cv="Mehrban-Ali-AI-Automation-Engineer-CV.pdf" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" class="ico" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2.8H7.2a2 2 0 0 0-2 2v14.4a2 2 0 0 0 2 2h9.6a2 2 0 0 0 2-2V7.8Z"/><path d="M14 2.8v5h4.8M12 11.4v5.2M9.7 14.3l2.3 2.3 2.3-2.3"/></svg>Download CV</a></li>
+  </ul>
+
+  <dl class="hire-facts">
+    <div><dt>Available</dt><dd>Immediately</dd></div>
+    <div><dt>Based in</dt><dd>Islamabad &mdash; remote, or relocating</dd></div>
+    <div><dt>For the UAE</dt><dd>Visa sponsorship required</dd></div>
+    <div><dt>Open to</dt><dd>AI Automation Engineer &middot; RPA Developer</dd></div>
+  </dl>
+
+  <p class="hire-proof-head">What the numbers are, if you want to check</p>
+  <ul class="hire-proof">
+    <li><a href="#work"><b>25+</b><span>client automation projects</span></a></li>
+    <li><a href="#p1"><b>100+</b><span>bookings a day, unattended</span></a></li>
+    <li><a href="#p3"><b>240+</b><span>Shopify stores tracked daily</span></a></li>
+    <li><a href="#certifications"><b>2</b><span>UiPath Associate certifications</span></a></li>
+  </ul>
+</dialog>
+
 <script>
 /* Theme switch. Three states: light and dark stamp the root element, "Auto"
    removes the stamp and lets prefers-color-scheme decide.
@@ -2329,6 +2445,66 @@ h2.sec::after {
       })
     })
   })
+})()
+
+;(function () {
+  /* The hire panel.
+
+     The button keeps its own mailto href, so with scripting off it still opens
+     an email. This intercepts the click and opens the dialog instead, which is
+     the point: a bare mailto does nothing visible on a machine with no mail
+     client configured, and that is a lost enquiry.
+
+     <dialog>.showModal() brings Esc, the focus trap and the backdrop with it.
+     Nothing here re-implements any of that. */
+  var dlg = document.getElementById('hire')
+  var trigger = document.querySelector('a[data-hire]')
+  if (!dlg || !trigger || typeof dlg.showModal !== 'function') return
+
+  trigger.addEventListener('click', function (e) {
+    e.preventDefault()
+    dlg.showModal()
+  })
+
+  // Clicking the backdrop closes it. The dialog's own box is the only thing
+  // inside its rect, so a click outside that rect is a backdrop click.
+  dlg.addEventListener('click', function (e) {
+    if (e.target !== dlg) return
+    var r = dlg.getBoundingClientRect()
+    var inside = e.clientX >= r.left && e.clientX <= r.right &&
+                 e.clientY >= r.top && e.clientY <= r.bottom
+    if (!inside) dlg.close()
+  })
+
+  // A jump link inside a modal cannot scroll the page behind it, so close
+  // first and let the anchor do its work.
+  dlg.querySelectorAll('a[href^="#"]').forEach(function (a) {
+    a.addEventListener('click', function () { dlg.close() })
+  })
+
+  /* Copy the address. This exists because the clipboard is the one route that
+     still works when the mail client does not. If the API is unavailable or
+     refused, fall back to selecting the text so it can be copied by hand. */
+  var copyBtn = dlg.querySelector('[data-copy]')
+  if (copyBtn) {
+    var label = copyBtn.querySelector('.copy-label')
+    var original = label.textContent
+    var timer
+    copyBtn.addEventListener('click', function () {
+      var value = copyBtn.getAttribute('data-copy')
+      var done = function (ok) {
+        label.textContent = ok ? 'Copied' : value
+        clearTimeout(timer)
+        timer = setTimeout(function () { label.textContent = original }, 2400)
+      }
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(value).then(function () { done(true) },
+                                                  function () { done(false) })
+      } else {
+        done(false)
+      }
+    })
+  }
 })()
 
 ;(function () {
