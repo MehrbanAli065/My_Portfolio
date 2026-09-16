@@ -422,7 +422,7 @@ h1  Mehrban Ali
 │   └── h3  <role title>  ×3
 ├── h2  What I work with
 │   └── h3  <capability>  ×6
-├── h2  Eight UiPath certifications
+├── h2  Two certifications and nine course completions
 └── h2  Open to RPA and Automation Engineer roles in the UAE   (footer)
 ```
 
