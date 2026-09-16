@@ -1423,6 +1423,9 @@ h2.sec::after {
 .hire-tool i { font-style: normal; font-size: var(--fs-mono-sm); font-weight: 600; color: var(--ink) }
 
 .hire-foot { padding-top: 20px; border-top: 1px solid var(--rule) }
+.hire-alt { margin: 11px 0 0; font-size: var(--fs-mono-sm); color: var(--muted) }
+.hire-alt a { color: var(--accent-2); text-underline-offset: 3px }
+.hire-alt a:hover { color: var(--deep) }
 .hire-avail { margin: 14px 0 0; font-size: var(--fs-mono-sm); line-height: var(--lh-snug); color: var(--faint) }
 
 @media (max-width: 680px) {
@@ -1471,7 +1474,7 @@ h2.sec::after {
         <p class="blurb rise rise-2">I build automations that hold up in production &mdash; AI voice agents that take the call, UiPath robots that do the work inside the system of record, and the pipelines that join the two.</p>
         <div class="cta rise rise-3">
           <a class="btn" href="#work"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6"/></svg>View my work</a>
-          <a class="btn btn--ghost" href="mailto:mehrbanali25062000@gmail.com" data-hire><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="4.75" width="19" height="14.5" rx="2.2"/><path d="m3.2 6.4 8.8 6.4 8.8-6.4"/></svg>Hire me</a>
+          <a class="btn btn--ghost" href="mailto:mehrbanali25062000@gmail.com" data-hire><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="4.75" width="19" height="14.5" rx="2.2"/><path d="m3.2 6.4 8.8 6.4 8.8-6.4"/></svg>Hire me for</a>
           <!-- The PDF is published alongside this page, so the href is a real
                file. Two routes on purpose: the link on its own opens the CV in
                a new tab, and where the viewer's client allows it the script at
@@ -2382,7 +2385,7 @@ h2.sec::after {
     <li>
       <h3>End-to-end delivery</h3>
       <p>The robot and the application around it: React or Next.js front end, Node and Express API, PostgreSQL, deployed.</p>
-      <a class="cap-proof" href="#work"><b>25+</b>client projects across five industries</a>
+      <a class="cap-proof" href="#work"><b>45+</b>automation projects across five industries</a>
     </li>
   </ul>
 
@@ -2394,6 +2397,11 @@ h2.sec::after {
       <a class="btn" href="mailto:mehrbanali25062000@gmail.com?subject=Role%20enquiry%20%E2%80%94%20Mehrban%20Ali&body=Hi%20Mehrban%2C%0A%0ARole%3A%20%0ACompany%3A%20%0ALocation%3A%20%0A%0A"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="4.75" width="19" height="14.5" rx="2.2"/><path d="m3.2 6.4 8.8 6.4 8.8-6.4"/></svg>Email me</a>
       <button class="btn btn--ghost" type="button" data-copy="mehrbanali25062000@gmail.com"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="8.6" y="8.6" width="12" height="12" rx="2.4"/><path d="M15.4 5.4H5.8a2.4 2.4 0 0 0-2.4 2.4v9.6"/></svg><span class="copy-label">Copy address</span></button>
     </div>
+    <!-- mailto is correct and opens Outlook, Apple Mail and the rest. On a
+         machine with no mail client configured it does nothing visible at
+         all, which is a lost enquiry, so this is the way out for everyone
+         else. -->
+    <p class="hire-alt">or <a href="https://mail.google.com/mail/?view=cm&amp;fs=1&amp;to=mehrbanali25062000@gmail.com&amp;su=Role%20enquiry%20%E2%80%94%20Mehrban%20Ali&amp;body=Hi%20Mehrban%2C%0A%0ARole%3A%20%0ACompany%3A%20%0ALocation%3A%20%0A%0A" target="_blank" rel="noopener">open a Gmail compose window</a></p>
     <p class="hire-avail">Available immediately &middot; Islamabad, remote or relocating &middot; the UAE needs visa sponsorship</p>
   </div>
 </dialog>
