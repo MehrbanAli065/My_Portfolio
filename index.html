@@ -669,6 +669,15 @@ h2.sec {
 }
 .certs .cd.score { color: var(--signal); font-weight: 500 }
 
+/* The group label. Small, uppercase, and it sits close to its list so the two
+   read as one block rather than as a heading with a gap under it. */
+.certgroup {
+  font-size: var(--fs-label); font-weight: 700;
+  letter-spacing: var(--ls-label); text-transform: uppercase;
+  color: var(--accent); margin: 26px 0 6px;
+}
+.certgroup:first-of-type { margin-top: 6px }
+
 /* A list of certificate names is a claim; the mark and a verification link
    make it checkable. Only the credential that actually has a public page
    carries the link — the rest would be a dead promise. */
@@ -1462,8 +1471,8 @@ h2.sec::after {
         <span>scored on the UiPath Agentic Automation Developer Associate, Jun 2026</span>
       </div>
       <div class="cred">
-        <b>8</b>
-        <span>UiPath certifications held</span>
+        <b>11</b>
+        <span>UiPath and Make credentials &mdash; two examined certifications, nine course completions</span>
       </div>
       <div class="cred">
         <b>45+</b>
@@ -2186,16 +2195,28 @@ h2.sec::after {
 <section id="certifications">
   <div class="wrap">
     <p class="eyebrow">Certifications &amp; education</p>
-    <h2 class="sec">Eight UiPath certifications</h2>
+    <h2 class="sec">Two certifications, nine course completions</h2>
+    <!-- Two groups, because they are two different things: examined,
+         expiring credentials, and course completions that do not expire.
+         Listing them together inflates the count and costs credibility with
+         anyone who knows the difference. -->
+    <p class="certgroup">Professional</p>
     <ul class="certs">
-      <li><svg viewBox="0 0 24 24" class="cico" aria-hidden="true"><rect width="24" height="24" rx="5" fill="#FA4616"/><path fill="#fff" d="M6.9 5.6h3.2v8c0 1.5.8 2.3 2 2.3s2-.8 2-2.3v-8h3.2v8.2c0 3.1-2 5-5.2 5s-5.2-1.9-5.2-5V5.6Z"/></svg><span class="cn">Agentic Automation Developer Associate</span><span class="cd score">Jun 2026 &ndash; Jun 2028 &middot; scored 100%<a class="verify" href="https://www.credential.net/12e1a783-d74b-4af9-9de0-e6e6fabff276" target="_blank" rel="noopener">Verify<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 16 16 8M9.4 8H16v6.6"/></svg></a></span></li>
+      <li><svg viewBox="0 0 24 24" class="cico" aria-hidden="true"><rect width="24" height="24" rx="5" fill="#FA4616"/><path fill="#fff" d="M6.9 5.6h3.2v8c0 1.5.8 2.3 2 2.3s2-.8 2-2.3v-8h3.2v8.2c0 3.1-2 5-5.2 5s-5.2-1.9-5.2-5V5.6Z"/></svg><span class="cn">UiPath Agentic Automation Developer Associate</span><span class="cd score">Jun 2026 &ndash; Jun 2028 &middot; scored 100%<a class="verify" href="https://www.credential.net/12e1a783-d74b-4af9-9de0-e6e6fabff276" target="_blank" rel="noopener">Verify<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 16 16 8M9.4 8H16v6.6"/></svg></a></span></li>
+      <li><svg viewBox="0 0 24 24" class="cico" aria-hidden="true"><rect width="24" height="24" rx="5" fill="#FA4616"/><path fill="#fff" d="M6.9 5.6h3.2v8c0 1.5.8 2.3 2 2.3s2-.8 2-2.3v-8h3.2v8.2c0 3.1-2 5-5.2 5s-5.2-1.9-5.2-5V5.6Z"/></svg><span class="cn">UiPath Automation Developer Associate</span><span class="cd">May 2025 &ndash; May 2027</span></li>
+    </ul>
+
+    <p class="certgroup">Foundation &amp; courses</p>
+    <ul class="certs">
       <li><svg viewBox="0 0 24 24" class="cico" aria-hidden="true"><rect width="24" height="24" rx="5" fill="#FA4616"/><path fill="#fff" d="M6.9 5.6h3.2v8c0 1.5.8 2.3 2 2.3s2-.8 2-2.3v-8h3.2v8.2c0 3.1-2 5-5.2 5s-5.2-1.9-5.2-5V5.6Z"/></svg><span class="cn">Agentic Prompt Engineering</span><span class="cd">Jun 2026</span></li>
       <li><svg viewBox="0 0 24 24" class="cico" aria-hidden="true"><rect width="24" height="24" rx="5" fill="#FA4616"/><path fill="#fff" d="M6.9 5.6h3.2v8c0 1.5.8 2.3 2 2.3s2-.8 2-2.3v-8h3.2v8.2c0 3.1-2 5-5.2 5s-5.2-1.9-5.2-5V5.6Z"/></svg><span class="cn">Introduction to Agentic Automation</span><span class="cd">Apr 2026</span></li>
-      <li><svg viewBox="0 0 24 24" class="cico" aria-hidden="true"><rect width="24" height="24" rx="5" fill="#FA4616"/><path fill="#fff" d="M6.9 5.6h3.2v8c0 1.5.8 2.3 2 2.3s2-.8 2-2.3v-8h3.2v8.2c0 3.1-2 5-5.2 5s-5.2-1.9-5.2-5V5.6Z"/></svg><span class="cn">Automation Developer Associate</span><span class="cd">May 2025 &ndash; May 2027</span></li>
-      <li><svg viewBox="0 0 24 24" class="cico" aria-hidden="true"><rect width="24" height="24" rx="5" fill="#FA4616"/><path fill="#fff" d="M6.9 5.6h3.2v8c0 1.5.8 2.3 2 2.3s2-.8 2-2.3v-8h3.2v8.2c0 3.1-2 5-5.2 5s-5.2-1.9-5.2-5V5.6Z"/></svg><span class="cn">Integration Service</span><span class="cd">May 2025</span></li>
+      <li><svg viewBox="0 0 24 24" class="cico" aria-hidden="true"><rect width="24" height="24" rx="5" fill="#FA4616"/><path fill="#fff" d="M6.9 5.6h3.2v8c0 1.5.8 2.3 2 2.3s2-.8 2-2.3v-8h3.2v8.2c0 3.1-2 5-5.2 5s-5.2-1.9-5.2-5V5.6Z"/></svg><span class="cn">UiPath Integration Service</span><span class="cd">May 2025</span></li>
       <li><svg viewBox="0 0 24 24" class="cico" aria-hidden="true"><rect width="24" height="24" rx="5" fill="#FA4616"/><path fill="#fff" d="M6.9 5.6h3.2v8c0 1.5.8 2.3 2 2.3s2-.8 2-2.3v-8h3.2v8.2c0 3.1-2 5-5.2 5s-5.2-1.9-5.2-5V5.6Z"/></svg><span class="cn">Working with Orchestrator Resources as an Automation Developer</span><span class="cd">May 2025</span></li>
       <li><svg viewBox="0 0 24 24" class="cico" aria-hidden="true"><rect width="24" height="24" rx="5" fill="#FA4616"/><path fill="#fff" d="M6.9 5.6h3.2v8c0 1.5.8 2.3 2 2.3s2-.8 2-2.3v-8h3.2v8.2c0 3.1-2 5-5.2 5s-5.2-1.9-5.2-5V5.6Z"/></svg><span class="cn">Introduction to Robotic Enterprise Framework</span><span class="cd">May 2025</span></li>
       <li><svg viewBox="0 0 24 24" class="cico" aria-hidden="true"><rect width="24" height="24" rx="5" fill="#FA4616"/><path fill="#fff" d="M6.9 5.6h3.2v8c0 1.5.8 2.3 2 2.3s2-.8 2-2.3v-8h3.2v8.2c0 3.1-2 5-5.2 5s-5.2-1.9-5.2-5V5.6Z"/></svg><span class="cn">Explore Automation Development with UiPath</span><span class="cd">May 2025</span></li>
+      <li><svg viewBox="0 0 24 24" class="cico" aria-hidden="true"><rect width="24" height="24" rx="5" fill="#6D00CC"/><g fill="#fff"><rect x="5.2" y="6.3" width="2.5" height="11.4" rx="1.25"/><polygon points="11.5,6.3 14,6.3 12.5,17.7 10,17.7"/><rect x="16.3" y="6.3" width="2.5" height="11.4" rx="1.25"/></g></svg><span class="cn">Make Foundation</span><span class="cd">Sep 2026</span></li>
+      <li><svg viewBox="0 0 24 24" class="cico" aria-hidden="true"><rect width="24" height="24" rx="5" fill="#6D00CC"/><g fill="#fff"><rect x="5.2" y="6.3" width="2.5" height="11.4" rx="1.25"/><polygon points="11.5,6.3 14,6.3 12.5,17.7 10,17.7"/><rect x="16.3" y="6.3" width="2.5" height="11.4" rx="1.25"/></g></svg><span class="cn">Make Intermediate</span><span class="cd">Sep 2026</span></li>
+      <li><svg viewBox="0 0 24 24" class="cico" aria-hidden="true"><rect width="24" height="24" rx="5" fill="#6D00CC"/><g fill="#fff"><rect x="5.2" y="6.3" width="2.5" height="11.4" rx="1.25"/><polygon points="11.5,6.3 14,6.3 12.5,17.7 10,17.7"/><rect x="16.3" y="6.3" width="2.5" height="11.4" rx="1.25"/></g></svg><span class="cn">Make Basic</span><span class="cd">Sep 2026</span></li>
     </ul>
     <div class="edu">
       <span class="deg">BS Computer Science &mdash; COMSATS University Islamabad</span>
