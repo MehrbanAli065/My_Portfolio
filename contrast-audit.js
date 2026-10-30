@@ -10,6 +10,16 @@
  * page, and an extractor looking for that tag would match the comment first.
  */
 (function () {
+  // Measure the settled page, not a frame of the load-in. The masthead fades in
+  // from opacity 0, and depending on when this ran it read the hero as
+  // 1.3:1 — a different set of "failures" every run. Finishing every animation
+  // first puts each element at its final colour and opacity.
+  if (document.getAnimations) {
+    document.getAnimations().forEach(function (a) {
+      try { a.finish() } catch (e) {}   // infinite ones (pulse, dash flow) throw; they do not affect text
+    })
+  }
+
   function parse (c) {
     var m = c.match(/rgba?\(([^)]+)\)/)
     if (!m) return null

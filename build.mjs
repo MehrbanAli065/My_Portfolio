@@ -36,7 +36,7 @@ const html = `<!doctype html>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>${title}</title>
-<meta name="description" content="AI Automation Engineer — Agentic AI, RAG, LangChain, LangGraph, MCP, RPA, UiPath certified, voice AI. Six systems, and how each one actually runs.">
+<meta name="description" content="AI Automation Engineer — Agentic AI, LLMs, RAG, LangChain, LangGraph, MCP, RPA, UiPath certified, voice AI. Six systems, and how each one actually runs.">
 <meta name="author" content="Mehrban Ali">
 <meta property="og:title" content="${title} — AI Automation Engineer">
 <meta property="og:description" content="Agentic AI, RAG, RPA, UiPath certified, voice AI. Six systems, and how each one actually runs.">
