@@ -20,6 +20,10 @@ contrast-audit.js
 # deployed; only the thing that makes it is excluded.
 og/
 
+# The UAE CV. The page stopped offering it on 30 Oct 2026; kept in Git so it
+# can come back, but not served.
+cv/uae/
+
 # Repository documentation and Git plumbing.
 README.md
 .gitattributes

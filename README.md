@@ -106,6 +106,7 @@ Each one is drawn to make a single point, which its caption states:
 | Shopify tracker | two callers, one PostgreSQL function, so the paths cannot drift |
 | AI Scoping Pipeline | a PM review gate between every AI stage, and the mapping table that makes re-runs safe |
 | Legal intake | the phase split, and the retry scope around the one step that fails intermittently |
+| AI phone receptionist (`#p6`, shown as 03) | booking happens inside the call — function calls into n8n, emergency flag mid-call |
 
 To edit one, the shapes use shared classes — `.dnode`, `.dnode--key` (the emphasised
 box), `.dlabel`, `.dsub`, `.dedge`, `.dedge--flow` (animated), `.dtag`, `.spark`.
@@ -354,6 +355,25 @@ Ordered by how much they carry. Client names are withheld throughout — see
 | Competitor Price & Stock Tracker | `Projects/Shopify_Stores/` | e-commerce competitor intelligence |
 | AI Scoping Pipeline | `Projects/Project_2_*/` | an internal delivery platform |
 | Legal Case Intake Automation | `Projects/St luice__Automation_Project (2).zip` | a US county |
+| AI Phone Receptionist (added 30 Oct 2026, third on the page, id `p6`) | `E:\Company_Projects\Project_10_*\` | a heating and cooling contractor. Client, owner, agent name and town are withheld |
+
+Figures for the receptionist: **7 tools / 11 nodes** — the agent JSON in `Agent-mockup/`
+(`conversationFlow.tools`, `.nodes`); **88 n8n nodes** — `Automation/N8N/workflows/*.json`,
+eight files; **174 → 0 over 504 windows** — his own fake-clock test harness, as written up
+in `LinkedIn/post.md`. "Live" is his word (30 Oct 2026); the folder's own README still says
+pre-launch.
+
+Skills from the other `Company_Projects` folders (Zoho CRM, Instantly, Resend, Klaviyo,
+WordPress REST API, Slack, Apify, Apps Script, GoHighLevel, image generation, webhook
+verification, bounce suppression) went into Capabilities only, at his instruction. The
+LangGraph proof line under *Agentic & Voice AI* is `E:\UiPath Agents\First_AI_Agent`.
+
+## UAE CV and visa line — removed 30 Oct 2026
+
+At his request the page no longer mentions visa sponsorship or offers the UAE CV. Every
+CV link is the Pakistan PDF. `api/cv.js` is kept for links already handed out but now
+always redirects to the Pakistan CV, and `cv/uae/` is in `.vercelignore`. The sections
+below that describe the geo route are history.
 
 ## Every figure on the page, and what it was counted from
 
@@ -507,6 +527,11 @@ the ones that slip.
   The `8` was evidence-based: eight project archives exist in `CV/*.zip`. **The files
   still only show eight**, so this figure now rests on his word, and the archives back
   up fewer than it claims.
+
+**Skills that rest on his word (added 30 Oct 2026):** Agentic AI frameworks, RAG, vector
+databases, LangChain, LangGraph and MCP servers. The projects were lost with a drive in
+the October reinstall. They appear in the hero, the keyword strip and the Capabilities
+section only — never in a project or an outcome. See `HANDOVER.md` §4c.
 
 Figures that rest on Mehrban's word rather than a file — **100+ bookings a day**, **100+
 students a day**, **25+ projects**, **20+ automations** — are Mehrban's own counts. They are marked as such in the page's closing note, and he should be
